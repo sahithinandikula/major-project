@@ -54,6 +54,7 @@ const store=MongoStore.create({
 store.on("error",()=>{
     console.log("ERROR in MONGO SESSION STORE",err);
 });
+
 const sessionOptions={
     store,
     secret:process.env.SECRET,
@@ -82,6 +83,8 @@ passport.use(new LocalStrategy(User.authenticate()));
 
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
+
+// console.log(req.user);
 
 app.use((req,res,next)=>{
   res.locals.success=req.flash("success");
